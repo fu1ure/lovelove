@@ -393,8 +393,39 @@
   }
   step();
 
-  kissBtn.addEventListener('click', () => {
-    document.body.innerHTML = '<div id="kiss-screen"><div class="emoji">💋</div></div>';
+kissBtn.addEventListener('click', () => {
+  // Сховати все крім музики
+  document.querySelectorAll('.sections, header, .bg-video, #hearts-container, #unpackBtn').forEach(el => {
+    el.style.display = 'none';
+  });
+
+  // Показати поцілунок
+  let kissScreen = document.getElementById('kiss-screen');
+  if (!kissScreen) {
+    kissScreen = document.createElement('div');
+    kissScreen.id = 'kiss-screen';
+    kissScreen.innerHTML = '<div class="emoji">💋</div>';
+    kissScreen.style.position = 'fixed';
+    kissScreen.style.inset = '0';
+    kissScreen.style.background = '#000';
+    kissScreen.style.display = 'flex';
+    kissScreen.style.alignItems = 'center';
+    kissScreen.style.justifyContent = 'center';
+    kissScreen.style.zIndex = '999999';
+    kissScreen.style.opacity = '0';
+    kissScreen.style.pointerEvents = 'auto';
+    kissScreen.querySelector('.emoji').style.fontSize = '160px';
+    kissScreen.querySelector('.emoji').style.animation = 'bounce 1.2s ease infinite alternate';
+    document.body.appendChild(kissScreen);
+
+    // Плавне з'явлення
+    setTimeout(() => kissScreen.style.opacity = '1', 50);
+  } else {
+    kissScreen.style.display = 'flex';
+    setTimeout(() => kissScreen.style.opacity = '1', 50);
+  }
+});
+
     setTimeout(() => {
       document.getElementById('kiss-screen').classList.add('show');
     }, 50);
@@ -416,3 +447,4 @@ document.addEventListener('click', () => {
 
 </body>
 </html>
+
