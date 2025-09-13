@@ -400,8 +400,24 @@
 }
 
 })();
+// Запускаємо музику після першої взаємодії
+const bgMusic = document.getElementById('bgMusic');
+let musicStarted = false;
+
+function startMusic() {
+  if (!musicStarted) {
+    bgMusic.play().catch(() => {});
+    musicStarted = true;
+  }
+}
+
+document.addEventListener('click', startMusic, { once: true });
+document.addEventListener('wheel', startMusic, { once: true });
+document.addEventListener('keydown', startMusic, { once: true });
 
 
 </script>
+  <audio id="bgMusic" src="./music.mp3" loop></audio>
 </body>
 </html>
+
